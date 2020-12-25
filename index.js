@@ -7,10 +7,9 @@ const app=express();
 
 const db = require('./config/mongoose');
 
-// const userDb  = require('../model/user');
+const cookieParser = require('cookie-parser');
 
-
-
+app.use(cookieParser())
 app.use(require('express-ejs-layouts'));
 app.use(express.static('./assets'));
 app.use(urlencoded())
