@@ -1,10 +1,14 @@
 const userDb = require('../model/user');
 
 module.exports.home = function (req, res) {
-    res.render('home', {
-        title: "profile",
-        name: "anuj"
-    })
+    if(req.isAuthenticated()){
+        // return res.redirect('/home');
+        res.render('home', {
+            title: "profile",
+            name: "anuj"
+        })
+    }
+    
 }
 module.exports.profile = function (req, res) {
     res.render('profile', {
@@ -13,6 +17,9 @@ module.exports.profile = function (req, res) {
 }
 
 module.exports.signUp = function (req, res) {
+    if(req.isAuthenticated()){
+        return res.redirect('/');
+    }
     res.render('signUp', {
 
     })
@@ -41,7 +48,19 @@ module.exports.createUser = function (req, res) {
     })
 }
 
+module.exports.signin = function(req,res){
+    if(req.isAuthenticated()){
+        return res.redirect('/');
+    }
+    res.render('signIn', {
 
-module.exports.signIn= function(req,res){
-     //to do latter
+    })
+}
+
+module.exports.createSession= function(req,res){
+     return res.redirect('/')
+}
+module.exports.signout= function(req,res){
+    req.logout();
+  return res.redirect('/');
 }
