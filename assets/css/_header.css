@@ -1,0 +1,25 @@
+#headerContainer {
+  background-color: #347d96;
+  height: 40px; }
+  #headerContainer a {
+    display: inline;
+    text-decoration: none;
+    display: inline; }
+  #headerContainer #logo {
+    margin: 0;
+    color: white;
+    text-align: left;
+    margin-left: 15px; }
+  #headerContainer ul {
+    position: relative;
+    top: -40px;
+    text-align: right; }
+    #headerContainer ul li {
+      height: -15px;
+      display: inline;
+      margin-right: 20px; }
+      #headerContainer ul li a {
+        text-decoration: none;
+        color: white;
+        font-size: large;
+        font-weight: 500; }

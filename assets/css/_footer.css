@@ -1,0 +1,9 @@
+#footerContainer {
+  position: absolute;
+  bottom: 0%;
+  background-color: gray;
+  height: 40px;
+  width: 100%; }
+  #footerContainer p {
+    text-align: left;
+    color: white; }

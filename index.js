@@ -11,7 +11,17 @@ const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy'); 
 const { urlencoded } = require('body-parser');
 const MongoStore = require('connect-mongo')(session); 
+const sassMiddleware = require('node-sass-middleware');
 
+
+app.use(sassMiddleware({
+    src:'./assets/scss',
+    dest:'./assets/css',
+    debug:true,
+    outputStyle:'extended',
+    prefix:'/css',
+
+}))
 app.use(cookieParser())
 app.use(expressLayout);
 app.use(express.static('./assets'));
@@ -24,9 +34,6 @@ app.set('layout extractScripts', true)
 
 
 
-
-app.set('layouts extractStyles', true)
-app.set('layouts extractScripts', true)
 app.set('view engine' , 'ejs')
 app.set('views', './view')
 
