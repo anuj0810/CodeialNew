@@ -24,4 +24,6 @@ routes.post('/createSession', passport.authenticate(
 
 routes.get('/signout', homeController.signout);
 
+routes.post('/createPost', passport.checkAuthentication, homeController.createPost);
+
 module.exports=routes

@@ -1,12 +1,33 @@
 const userDb = require('../model/user');
+const postDb = require('../model/post');
+const { populate } = require('../model/user');
 
 module.exports.home = function (req, res) {
     if(req.isAuthenticated()){
         // return res.redirect('/home');
-        res.render('home', {
-            title: "profile",
-            name: "anuj"
+        // postDb.find({}, function(err,post){
+        //     if(err){
+        //         return console.log("errror in finding post");
+        //     }
+        //    return  res.render('home', {
+        //         title: "profile",
+        //         name: "anuj",
+        //         post:post
+        //     })
+
+        // })
+        postDb.find({}).populate('user').exec(function(err,post){
+            if(err){
+                return console.log("errror in finding post");
+            }
+           return  res.render('home', {
+                title: "profile",
+                name: "anuj",
+                post:post
+            })
+
         })
+    
     }
     
 }
@@ -64,3 +85,15 @@ module.exports.signout= function(req,res){
     req.logout();
   return res.redirect('/');
 }
+
+module.exports.createPost = function(req,res){
+    postDb.create(
+        {content:req.body.content,
+        user:req.user.id},
+        function(err,post){
+            if(err){
+                 console.log("error while posting any post")
+                 return
+            }
+             return res.redirect('back');
+})}
