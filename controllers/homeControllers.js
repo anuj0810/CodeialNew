@@ -1,5 +1,7 @@
 const userDb = require('../model/user');
 const postDb = require('../model/post');
+const commmentDb = require('../model/comment');
+
 const { populate } = require('../model/user');
 
 module.exports.home = function (req, res) {
@@ -16,7 +18,15 @@ module.exports.home = function (req, res) {
         //     })
 
         // })
-        postDb.find({}).populate('user').exec(function(err,post){
+        postDb.find({})
+        .populate('user')
+        .populate({
+            path:'comments',
+            populate:{
+                path:'user'
+            }
+           }).
+        exec(function(err,post){
             if(err){
                 return console.log("errror in finding post");
             }
@@ -97,3 +107,29 @@ module.exports.createPost = function(req,res){
             }
              return res.redirect('back');
 })}
+
+module.exports.createComment = function(req,res){
+    postDb.findById(req.body.post, function(err,post){
+        if(err){
+            return console.log("error finding post for comment")
+        }
+        if(post){
+            commmentDb.create({
+                content:req.body.content,
+                user:req.user.id,
+                post:req.body.post
+            }, function(err,comment){
+                if(err){
+                    return console.log("error on comment")
+                }
+
+                post.comments.push(comment)
+                post.save()
+
+                return res.redirect('back');
+            })
+
+        }
+    })
+   
+}
