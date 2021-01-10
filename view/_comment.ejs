@@ -1,0 +1,12 @@
+<li>
+<p>
+    <% if(locals.user && (comment.user.id==locals.user.id || i.user.id==locals.user.id) ){ %>
+
+        <a href="comment/destoryComment/<%= comment._id %> ">X</a>
+        <% } %>
+        
+          <span>  <%= comment.content %></span>&nbsp;
+         <small> <%= comment.user.name %> </small>
+    
+</p>
+</li>

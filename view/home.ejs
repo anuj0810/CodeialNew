@@ -1,39 +1,18 @@
 <link rel="stylesheet" href="/css/home.css">
 
-<div>
-<h1>
-    Hey Buddy Welcome to Codeial
-</h1>
 
-<!-- <img src="/image/homepage-namaste.png" alt="welcom image"> -->
+    <h1>
+        Hey Buddy Welcome to Codeial
+    </h1>
 
-<form action="createPost" method="post">
-    <textarea name="content"  cols="30" rows="3"></textarea>
-    <input type="submit" value="Post">
-</form>
+        <form action="/post/createPost" method="post">
+            <textarea name="content" cols="30" rows="3"></textarea>
+            <input type="submit" value="Post">
+        </form>
+        <ul>
+            <% for( i of post ) { %>
+                     <%- include('_post'); -%>
 
-<ul>
-<% for( let i of post ) { %>
- <p> <li> <%= i.content %> </li>
-   <%= i.user.name %>
-</p>
-   <form action="createComment" method="post">
-       <input type="text" name="content" placeholder="add comment">
-       <input type="hidden" name="post" value="<%= i._id %>">
-       <input type="submit" value="Commnet">
-   </form>
-   <p>
-       <% for(comment of i.comments){ %>
-          <li> <%= comment.content %></li>
-          <%= comment.user.name %> 
-          <% }%>
-</p>
-<% } %>
-</ul>
-
-
-
-</div>
-
-
-
+                    <% } %>
+            </ul>
+      

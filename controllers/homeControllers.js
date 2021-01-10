@@ -5,10 +5,9 @@ const commmentDb = require('../model/comment');
 const { populate } = require('../model/user');
 
 module.exports.home = function (req, res) {
-    if(req.isAuthenticated()){
+    
         // return res.redirect('/home');
         // postDb.find({}, function(err,post){
-        //     if(err){
         //         return console.log("errror in finding post");
         //     }
         //    return  res.render('home', {
@@ -40,7 +39,7 @@ module.exports.home = function (req, res) {
     
     }
     
-}
+
 module.exports.profile = function (req, res) {
     res.render('profile', {
 
@@ -96,40 +95,5 @@ module.exports.signout= function(req,res){
   return res.redirect('/');
 }
 
-module.exports.createPost = function(req,res){
-    postDb.create(
-        {content:req.body.content,
-        user:req.user.id},
-        function(err,post){
-            if(err){
-                 console.log("error while posting any post")
-                 return
-            }
-             return res.redirect('back');
-})}
 
-module.exports.createComment = function(req,res){
-    postDb.findById(req.body.post, function(err,post){
-        if(err){
-            return console.log("error finding post for comment")
-        }
-        if(post){
-            commmentDb.create({
-                content:req.body.content,
-                user:req.user.id,
-                post:req.body.post
-            }, function(err,comment){
-                if(err){
-                    return console.log("error on comment")
-                }
 
-                post.comments.push(comment)
-                post.save()
-
-                return res.redirect('back');
-            })
-
-        }
-    })
-   
-}
