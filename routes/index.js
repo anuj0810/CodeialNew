@@ -8,7 +8,7 @@ const homeController = require('../controllers/homeControllers');
 
 routes.get('/', homeController.home);
 
-routes.get('/profile',passport.checkAuthentication,homeController.profile);
+routes.get('/profile/:id',passport.checkAuthentication,homeController.profile);
 
 routes.get('/signup', homeController.signUp);
 
@@ -26,5 +26,7 @@ routes.get('/signout', homeController.signout);
 routes.use('/post',require('./post'));
 
 routes.use('/comment',require('./comment'));
+
+routes.post('/updateUser/:id', homeController.updateUser)
 
 module.exports=routes

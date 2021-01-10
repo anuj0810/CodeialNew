@@ -1,18 +1,34 @@
 <link rel="stylesheet" href="/css/home.css">
 
 
-    <h1>
-        Hey Buddy Welcome to Codeial
-    </h1>
+<h1>
+    Hey Buddy Welcome to Codeial
+</h1>
+<div id="homeContainer">
+<section id="leftsection">
+    <form action="/post/createPost" method="post">
+        <textarea name="content" cols="30" rows="3"></textarea>
+        <input type="submit" value="Post">
+    </form>
+    <ul>
+        <% for( i of post ) { %>
+            <%- include('_post'); -%>
 
-        <form action="/post/createPost" method="post">
-            <textarea name="content" cols="30" rows="3"></textarea>
-            <input type="submit" value="Post">
-        </form>
-        <ul>
-            <% for( i of post ) { %>
-                     <%- include('_post'); -%>
-
-                    <% } %>
-            </ul>
-      
+                <% } %>
+    </ul>
+</section>
+<section id="friends">
+    <h3>Friends</h3>
+    <ul>
+        <% for( friend of allUser ) { %>
+            <li>
+                <a href="/profile/<%= friend.id %> ">
+                    <p>
+                        <%= friend.name %>
+                    </p>
+                </a>
+            </li>
+            <% } %>
+    </ul>
+</section>
+</div>
